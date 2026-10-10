@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0c121c;
+  --color-surface: #162033;
+  --color-fg: #f3efe6;
+  --color-muted: #93a0b5;
+  --color-primary: #e8a15a;
+  --color-accent: #6ec8a0;
+  --color-danger: #e15d4f;
+  --color-border: #2c3c54;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --radius-lg: 0.9rem;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html {
+    color-scheme: dark;
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+}
+
+.shell {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  --pad: 0px;
+}
+
+.stage {
+  position: relative;
+  width: min(100vw, calc((100dvh - var(--pad)) * 16 / 9));
+  max-height: calc(100dvh - var(--pad));
+  aspect-ratio: 16 / 9;
+  background: var(--color-bg);
+  touch-action: none;
+}
+
+.stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.lamp-dot {
+  box-shadow: 0 0 14px var(--color-primary);
+}
+
+.touch-bar {
+  display: none;
+  width: min(100vw, 40rem);
+  gap: 0.75rem;
+  padding: 0.75rem 0.75rem 1rem;
+}
+
+@media (max-width: 840px), (pointer: coarse) {
+  .shell.has-controls {
+    --pad: 6.5rem;
+    justify-content: flex-start;
+  }
+
+  .touch-bar.is-live {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.35fr;
+  }
+}
+
+.btn-primary,
+.btn-ghost {
+  min-height: 2.75rem;
+  border-radius: var(--radius-lg);
+  padding: 0.7rem 1rem;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.btn-ghost {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
